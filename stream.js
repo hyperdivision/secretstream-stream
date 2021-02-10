@@ -54,6 +54,7 @@ class Pull extends Stream.Transform {
 
     function onheader (header) {
       self._transport = secretstream.decrypt(header, self.key)
+      cb()
     }
   }
 }

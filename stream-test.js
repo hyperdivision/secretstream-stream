@@ -18,13 +18,10 @@ const out = new streamx.Duplex({
   }
 })
 
-const enc = new stream.SecretstreamPush(keys.tx)
-const dec = new stream.SecretstreamPull(keys.tx)
+const enc = new stream.Push(keys.tx)
+const dec = new stream.Pull(keys.tx)
 
-process.stdin.pipe(enc)
-dec.pipe(process.stdout)
-
-enc.pipe(dec)
+process.stdin.pipe(enc).pipe(dec).pipe(process.stdout)
 
 st.push(Buffer.from('testing1'))
 st.push(Buffer.from('testing2'))
