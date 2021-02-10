@@ -12,11 +12,6 @@ class Push extends Stream.Transform {
     this.push(header)
   }
 
-  _read (cb) {
-    this.resume()
-    cb()
-  }
-
   _transform (data, cb) {
     const tag = secretstream.TAG_MESSAGE
     const ciphertext = this._transport.encrypt(tag, data)
@@ -32,11 +27,6 @@ class Pull extends Stream.Transform {
 
     this.key = key
     this._transport = null
-  }
-
-  _read (cb) {
-    this.resume()
-    cb()
   }
 
   _transform (data, cb) {
